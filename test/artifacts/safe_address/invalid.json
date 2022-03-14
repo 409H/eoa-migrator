@@ -1,0 +1,6 @@
+{
+    "address": "0xD114e09c49dA1096d25C8c3d7eF2b88074894954",
+    "msg": "This is an example signed message where the sig is wrong, so it is invalid.",
+    "sig": "0x77cc4e366fa74177aa15194e977577670c3b99b833b85c2e92b6a72f68d647a240d2243db5e79a015bb72fa5b457bf3cff02f3790e359f58f748fb2a2bf5eb6f1b",
+    "version": "2"
+}

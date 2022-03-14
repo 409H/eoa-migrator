@@ -1,0 +1,157 @@
+{
+    "type": "object",
+    "properties": {
+        "DONATION": {
+            "type": "object",
+            "properties": {
+                "ADDRESS": {
+                    "type": "string",
+                    "pattern": "^0x[a-fA-F0-9]{40}$"
+                },
+                "MAPPING": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": [{
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "wei": {
+                                "type": "number"
+                            },
+                            "msg": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "wei",
+                            "msg"
+                        ]
+                    }]
+                }
+            },
+            "required": [
+                "ADDRESS",
+                "MAPPING"
+            ]
+        },
+        "ETH_SCAN": {
+            "type": "array",
+            "minItems": 1,
+            "items": [{
+                "type": "object",
+                "properties": {
+                    "chainId": {
+                        "type": "number"
+                    },
+                    "contractAddress": {
+                        "type": "string",
+                        "pattern": "^0x[a-fA-F0-9]{40}$"
+                    }
+                },
+                "required": [
+                    "chainId",
+                    "contractAddress"
+                ]
+            }]
+        },
+        "CHAINS": {
+            "type": "array",
+            "minItems": 1,
+            "items": [{
+                "type": "object",
+                "properties": {
+                    "chainId": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "bg": {
+                        "type": "string"
+                    },
+                    "color": {
+                        "type": "string"
+                    },
+                    "api": {
+                        "type": "string"
+                    },
+                    "default_api_key": {
+                        "type": "string"
+                    },
+                    "explorer_tx": {
+                        "type": "string"
+                    },
+                    "explorer_addr": {
+                        "type": "string"
+                    },
+                    "rpc": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "chainId",
+                    "name",
+                    "bg",
+                    "color",
+                    "api",
+                    "default_api_key",
+                    "explorer_tx",
+                    "explorer_addr",
+                    "rpc"
+                ]
+            }]
+        },
+        "TOKENS": {
+            "type": "object",
+            "properties": {
+                "ENDPOINT": {
+                    "type": "string"
+                },
+                "ADDITIONAL_TOKENS": {
+                    "type": "array",
+                    "minItems": 0,
+                    "items": [{
+                        "type": "object",
+                        "properties": {
+                            "chainId": {
+                                "type": "number"
+                            },
+                            "address": {
+                                "type": "string",
+                                "pattern": "^0x[a-fA-F0-9]{40}$"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "decimals": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "chainId",
+                            "address",
+                            "symbol",
+                            "decimals"
+                        ]
+                    }]
+                }
+            },
+            "required": [
+                "ENDPOINT",
+                "ADDITIONAL_TOKENS"
+            ]
+        }
+    },
+    "required": [
+        "DONATION",
+        "ETH_SCAN",
+        "CHAINS",
+        "TOKENS"
+    ]
+}

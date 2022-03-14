@@ -1,0 +1,3 @@
+export { 
+    verifySignedMessage 
+} from "./signedMessage"

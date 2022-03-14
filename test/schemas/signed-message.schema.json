@@ -1,0 +1,25 @@
+{
+    "type": "object",
+    "properties": {
+        "address": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$"
+        },
+        "msg": {
+            "type": "string"
+        },
+        "sig": {
+            "type": "string"
+        },
+        "version": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "address",
+        "msg",
+        "sig",
+        "version"
+    ],
+	"additionalProperties": false
+}

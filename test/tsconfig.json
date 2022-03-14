@@ -1,0 +1,31 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+      "baseUrl": "./",
+      "module": "commonjs",
+      "experimentalDecorators": true,
+      "strictPropertyInitialization": false,
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "isolatedModules": false,
+      "strict": false,
+      "noImplicitAny": false,
+      "typeRoots" : [
+        "../node_modules/@types"
+      ],
+      "paths": {
+        "@config": ["../src/config.ts"],
+        "@app/*": ["../src/*"],
+        "@components/*": ["../src/components/*"],
+        "@schemas/*": ["./schemas/*"],
+        "@artifacts/*": ["./artifacts/*"],
+        "@utils/*": ["../src/utils/*"]
+      }
+    },
+    "exclude": [
+      "../node_modules"
+    ],
+    "include": [
+      "./**/*.ts"
+    ]
+  }

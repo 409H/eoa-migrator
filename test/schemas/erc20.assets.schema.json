@@ -1,0 +1,56 @@
+{
+    "type": "object",
+    "properties": {
+        "address": {
+            "type": "string"
+        },
+        "assets": {
+            "type": "object",
+            "properties": {
+                "erc20": {
+                    "type": "array",
+                    "minItems": 0,
+                    "items": [{
+                        "type": "object",
+                        "properties": {
+                            "chainId": {
+                                "type": "integer"
+                            },
+                            "address": {
+                                "type": "string",
+                                "pattern": "^0x[a-fA-F0-9]{40}$"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            },
+                            "decimals": {
+                                "type": "integer"
+                            },
+                            "logoURI": {
+                                "type": ["string", "null"]
+                            },
+                            "balance": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "chainId",
+                            "address",
+                            "symbol",
+                            "decimals",
+                            "balance"
+                        ]
+                    }]
+                }
+            }
+        }
+    },
+    "required": [
+        "address",
+        "assets"
+    ],
+    "additionalProperties": false
+}
