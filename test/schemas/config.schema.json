@@ -1,6 +1,14 @@
 {
     "type": "object",
     "properties": {
+        "GAS": {
+            "type": "object",
+            "properties": {
+                "ENDPOINT": {
+                    "type": "string"
+                }
+            }
+        },
         "DONATION": {
             "type": "object",
             "properties": {
@@ -149,6 +157,7 @@
         }
     },
     "required": [
+        "GAS",
         "DONATION",
         "ETH_SCAN",
         "CHAINS",

@@ -1,4 +1,7 @@
 const CONFIG = {
+    GAS: {
+        ENDPOINT: "https://gas.mycryptoapi.com/"
+    },
     DONATION: {
         ADDRESS: "0x661b5dc032bedb210f225df4b1aa2bdd669b38bc",
         MAPPING: [{

@@ -2,7 +2,9 @@ import React, { useContext, useState } from "react"
 import styled from "styled-components"
 import { ethers, utils } from "ethers"
 
-import { IContract } from "./types"
+import CONFIG from "@config"
+
+import { IChain, IContract } from "./types"
 import { AppStateContext } from "../../../App"
 
 interface ITransferButton {
@@ -63,6 +65,7 @@ const Contract = (props: IProps) => {
     const [isEip173TransferEnabled, setIsEip173TransferEnabled] = useState<null | boolean>(null)
     const [txPending, setTxPending] = useState<boolean>(false);
     const { contract, safeAddress } = props;
+    const { CHAINS } = CONFIG;
 
     const checkIfEip173 = async() => {
         const ABI = ["function owner() external view returns (address)"];
@@ -98,11 +101,16 @@ const Contract = (props: IProps) => {
         setTxPending(true)
     }
 
+    const getBlockExplorerLink = () => {
+        return CHAINS.filter((chain: IChain) => chain.chainId === AppState.chainId)[0].explorer_addr
+    }
+
     return(
         <Container>
             <Fullname>{[contract.addr.substring(0, 6), contract.addr.substring(36, 42)].join(`...`)}</Fullname>
             <Description>
-                Deployed on block {contract.block}
+                Deployed on block {contract.block} <br />
+                <a href={`${getBlockExplorerLink()}/${contract.addr}`} target="_blank" rel="nofollow">View on Block Explorer</a>
             </Description>
 
             {

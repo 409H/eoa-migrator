@@ -4,6 +4,7 @@ import styled from "styled-components"
 import SafeAddressPanel from "../SafeAddressPanel"
 import VerifySafeAddress from "./VerifySafeAddress"
 import ERC20 from "./ERC20"
+import Nft from "./Nft"
 import Contracts from "./Contracts"
 
 interface IStep {
@@ -69,6 +70,14 @@ class Stepper extends React.Component<{}, IState> {
                 return(<>
                             <SafeAddressPanel  safeAddress={this.state.safeAddress} />
                             <ERC20 
+                                callback={this.updateState} 
+                                safeAddress={this.state.safeAddress}
+                            />
+                        </>)
+            case 2 :
+                return(<>
+                            <SafeAddressPanel  safeAddress={this.state.safeAddress} />
+                            <Nft
                                 callback={this.updateState} 
                                 safeAddress={this.state.safeAddress}
                             />

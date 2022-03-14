@@ -5,6 +5,7 @@ import { AppStateContext } from "../../../App"
 import CONFIG from "@config"
 
 import Token from "./Token"
+import TotalCostEstimator from "@components/TotalCostEstimator"
 
 import { getUserErc20AssetBalances } from '../../../utils/erc20'
 import { RainbowText } from "../../RainbowText"
@@ -115,6 +116,15 @@ const ERC20 = (props: any) => {
     return(
         <Container>
             <Heading>ERC20 Tokens</Heading>
+            
+            {
+                tokens.length > 0 && 
+                <TotalCostEstimator
+                    avgGasLimit={75000}
+                    totalTransactions={tokens.length}
+                />
+            }
+
             {renderLoadingOrTokens()}
         </Container>
     )
