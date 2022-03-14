@@ -2,11 +2,14 @@ import React, { createContext } from 'react';
 import styled from 'styled-components';
 import regeneratorRuntime from "regenerator-runtime";
 
-import { web3Modal, initWeb3 } from '@providers/';
+import { web3Modal } from '@providers/';
 import { Hero } from '@components/Hero';
+import NotSupportedChain from '@components/NotSupportedChain';
 import { Stepper } from '@components/Stepper';
 import { Footer } from '@components/Footer';
 import { ethers, utils } from 'ethers';
+
+import CONFIG from '@config';
 
 const Container = styled.div`
   background: #FEFEFE;
@@ -40,6 +43,7 @@ class App extends React.Component {
     }
 
     this.web3Modal = web3Modal
+    this.supportedChain = this.supportedChain.bind(this)
   }
 
   componentDidMount() {
@@ -113,6 +117,15 @@ class App extends React.Component {
 
   };
 
+  supportedChain = () => {
+    const chainInfo = CONFIG.CHAINS.filter((chain) => chain.chainId === this.state.chainId)
+    if(!chainInfo.length) {
+      return false
+    }
+
+    return true
+  }
+
   render() {
     return (
       <AppStateContext.Provider value={this.state}>
@@ -122,7 +135,11 @@ class App extends React.Component {
             reset={this.resetApp}
           />
           <MainBody>
-            <Stepper />
+            {
+              this.supportedChain()
+              ? <Stepper />
+              : <NotSupportedChain />
+            }
           </MainBody>
         </Container>
         <Footer />

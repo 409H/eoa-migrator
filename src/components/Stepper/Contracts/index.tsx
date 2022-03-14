@@ -158,7 +158,7 @@ const Contracts = (props: any) => {
 
     const renderResults = () => {
         if(isLoading) {
-            return(<>Fetching Data...</>)
+            return(<>Fetching Data...<br /></>)
         }
 
         if(error.length > 0) {
@@ -198,8 +198,9 @@ const Contracts = (props: any) => {
             and if it has and it is detected to be <a href="https://eips.ethereum.org/EIPS/eip-173" target="_blank">EIP173</a> compliant, then we will offer you an easy-to-use button to{' '}
             transfer ownership to your identified safe address.
         </p>
+    
 
-        {totalToFetch > 0 && <TotalCreated>Total Contracts Created: {totalToFetch.toString()}</TotalCreated>}
+        {!isLoading && totalToFetch > 0 && <TotalCreated>Total Contracts Created: {totalToFetch.toString()}</TotalCreated>}
 
         {renderResults()}
     </>)

@@ -1,14 +1,6 @@
 {
     "type": "object",
     "properties": {
-        "GAS": {
-            "type": "object",
-            "properties": {
-                "ENDPOINT": {
-                    "type": "string"
-                }
-            }
-        },
         "DONATION": {
             "type": "object",
             "properties": {
@@ -97,6 +89,12 @@
                     },
                     "rpc": {
                         "type": "string"
+                    },
+                    "gas": {
+                        "type": "string"
+                    },
+                    "ticker": {
+                        "type": "string"
                     }
                 },
                 "required": [
@@ -108,7 +106,9 @@
                     "default_api_key",
                     "explorer_tx",
                     "explorer_addr",
-                    "rpc"
+                    "rpc",
+                    "gas",
+                    "ticker"
                 ]
             }]
         },

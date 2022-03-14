@@ -1,7 +1,4 @@
 const CONFIG = {
-    GAS: {
-        ENDPOINT: "https://gas.mycryptoapi.com/"
-    },
     DONATION: {
         ADDRESS: "0x661b5dc032bedb210f225df4b1aa2bdd669b38bc",
         MAPPING: [{
@@ -46,6 +43,8 @@ const CONFIG = {
         explorer_tx: `https://etherscan.io/tx/`,
         explorer_addr: `https://etherscan.io/address/`,
         rpc: `https://api.mycryptoapi.com/eth`,
+        gas: `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey={apikey}`,
+        ticker: `ETH`
     }, {
         chainId: 56,
         name: "BinanceSmartChain",
@@ -56,6 +55,8 @@ const CONFIG = {
         explorer_tx: `https://bscscan.com/tx/`,
         explorer_addr: `https://bscscan.com/address/`,
         rpc: `https://bsc-dataseed.binance.org/`,
+        gas: `https://api.bscscan.com/api?module=gastracker&action=gasoracle&apikey={apikey}`,
+        ticker: `BNB`
     }, {
         chainId: 137,
         name: "Polygon",
@@ -66,6 +67,8 @@ const CONFIG = {
         explorer_tx: `https://polygonscan.com/tx/`,
         explorer_addr: `https://polygonscan.com/address/`,
         rpc: `https://polygon-rpc.com`,
+        gas: `https://api.polygonscan.com/api?module=gastracker&action=gasoracle&apikey={apikey}`,
+        ticker: `MATIC`
     }],
     TOKENS: {
         ENDPOINT: "https://tokens.coingecko.com/uniswap/all.json",
@@ -73,6 +76,12 @@ const CONFIG = {
             chainId: 56,
             address: "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D",
             symbol: "SHIB",
+            decimals: 18,
+            logoURI: ""
+        }, {
+            chainId: 137,
+            address: "0x2c89bbc92bd86f8075d1decc58c7f4e0107f286b",
+            symbol: "AVAX",
             decimals: 18,
             logoURI: ""
         }]

@@ -102,7 +102,7 @@ const Token = (props: IProps) => {
     return(
         <Container>
             <ImageContainer>
-                {token.logoURI && <TokenLogo src={token.logoURI} />}
+                <TokenLogo src={token.logoURI ?? ""} />
                 <Heading>
                     <RainbowText text={token.symbol} />
                 </Heading>

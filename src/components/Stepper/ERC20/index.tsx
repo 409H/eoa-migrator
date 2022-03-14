@@ -118,7 +118,7 @@ const ERC20 = (props: any) => {
             <Heading>ERC20 Tokens</Heading>
             
             {
-                tokens.length > 0 && 
+                !loading && tokens.length > 0 && 
                 <TotalCostEstimator
                     avgGasLimit={75000}
                     totalTransactions={tokens.length}
