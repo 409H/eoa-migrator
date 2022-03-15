@@ -2,7 +2,18 @@
 
 This is a React app that has various different tools to help you realise what assets you have on your address and help you craft transactions to move those assets to an identified safe address.
 
-## Design Considerations
+## Install
+
+```bash
+yarn install # install dependencies
+yarn start # start development server
+yarn test # run mocha tests
+yarn test:components # run tests against react components
+
+yarn build # build production
+```
+
+## Design Considerations
 
 ### Safe Address
 

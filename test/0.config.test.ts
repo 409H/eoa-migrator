@@ -20,7 +20,6 @@ describe('Application config', function () {
         const config = CONFIG
         const validate = ajv.compile(configSchema);
         const valid = validate(config);
-        console.log(validate.errors)
         assert.equal(true, valid, `Invalid Schema for config in file CONFIG.json`);
     });
 });

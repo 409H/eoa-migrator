@@ -157,7 +157,6 @@
         }
     },
     "required": [
-        "GAS",
         "DONATION",
         "ETH_SCAN",
         "CHAINS",
