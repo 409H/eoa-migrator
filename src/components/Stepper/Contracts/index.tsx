@@ -70,7 +70,7 @@ const Contracts = (props: any) => {
             if(api) {
                 let endpoint = chain[0].api;
             
-                endpoint = endpoint.replace("{address}", "0x11b6A5fE2906F3354145613DB0d99CEB51f604C9") //AppState.userAddress)
+                endpoint = endpoint.replace("{address}", AppState.userAddress)
                 endpoint = endpoint.replace("{apikey}", chain[0].default_api_key)
 
                 return endpoint;
