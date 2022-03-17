@@ -9,6 +9,7 @@ import { AppStateContext } from "../../../App"
 
 interface ITransferButton {
     txPending: boolean;
+    bgColor: string;
 }
 
 const Container = styled.div`
@@ -36,8 +37,10 @@ const Description = styled.div`
 `
 const TransferButton = styled.div<ITransferButton>`
     background: ${props => !props.txPending
-                    ? '#3B2A53' 
-                    : '#DEBC1F'
+                    ? 
+                        props.bgColor
+                    : 
+                    '#DEBC1F'
                 };
     width: 100%;
     color: #FFF;
@@ -49,7 +52,7 @@ const TransferButton = styled.div<ITransferButton>`
     &:hover {
         cursor: ${props => !props.txPending ? 'pointer' : 'not-allowed'};
         background: ${props => !props.txPending
-                        ? '#3B2A53'
+                        ? props.bgColor
                         : '#DEBC1F'};
     }
 `
@@ -118,7 +121,9 @@ const Contract = (props: IProps) => {
                 !hasCheckedIfEip173 
                 && <TransferButton
                         onClick={() => checkIfEip173()}
-                        txPending={txPending}>
+                        txPending={txPending}
+                        bgColor={`#3B2A53`}
+                    >
                             Check EIP173
                     </TransferButton>
             }
@@ -128,7 +133,9 @@ const Contract = (props: IProps) => {
                 // and it can not be transferred
                 hasCheckedIfEip173  && !isEip173TransferEnabled
                 && <TransferButton
-                        txPending={txPending}>
+                        txPending={txPending}
+                        bgColor={`#de1f51`}
+                    >
                             Not EIP173 - No Ownership
                     </TransferButton>
             }
@@ -139,7 +146,9 @@ const Contract = (props: IProps) => {
                 hasCheckedIfEip173 && isEip173TransferEnabled
                 && <TransferButton
                         onClick={() => transferOwnership()}
-                        txPending={txPending}>
+                        txPending={txPending}
+                        bgColor={`#1fde24`}
+                    >
                             Transfer Ownership
                     </TransferButton>
             }
