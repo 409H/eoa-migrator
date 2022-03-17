@@ -34,3 +34,15 @@ The application is configured to read from a [TokenList](https://uniswap.org/blo
     logoURI: ""
 }]
 ```
+
+## Limitations
+
+### Non-proxying requests
+
+As requests to third parties are not proxied (and thus cached), there can be instances in which requests can fail due to rate limiting or other factors which will render the application in a non-usable state for the time being the third-party is rate limiting. 
+
+In the future, we do plan to proxy third-party requests so that we can have better responses from third-parties.
+
+### EIP-17
+
+Currently, the owned contracts checked for EIP173 interface only. It does this by calling `owner()` on the contract and if it is successful, it assumes EIP173 interface and allows you to call `transferOwnership()`.
