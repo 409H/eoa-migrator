@@ -39,6 +39,10 @@ const TotalCostEstimator = (props: IProps) => {
 
     const getCurrentGasPrice = async() => {
         // Get the gas oracle
+        if(chainInfo.gas === "") {
+            return 
+        }
+        
         const gas = await fetch(chainInfo.gas.replace("{apikey}", chainInfo.default_api_key))
             .then(response => response.json())
                 .then(data => {
