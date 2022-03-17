@@ -57,7 +57,7 @@ const ERC20 = (props: any) => {
         let tokensFromEthScan;
         const RPC_ENDPOINT = getRpcForChainId()
         try {
-            tokensFromEthScan = await getUserErc20AssetBalances(RPC_ENDPOINT, AppState.userAddress, AppState.chainId);
+            tokensFromEthScan = await getUserErc20AssetBalances(RPC_ENDPOINT, AppState.userAddress, AppState.chainId, null);
         } catch(e) {
             console.log(e);
 
