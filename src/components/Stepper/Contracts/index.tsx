@@ -144,9 +144,6 @@ const Contracts = (props: any) => {
                             safeAddress={props.safeAddress}
                             contract={e}
                         />
-                        // <Item key={e.hash}>
-                        //     <a href={`${endpoint}/${e.hash}`} target="_blank" rel="nofollow noreferer">{e.addr}</a> (Block: {e.block}) <Button onClick={() => checkIfEip173(e.addr)}>Check</Button>
-                        // </Item>
                     )})
                 }
             </ItemList>)
