@@ -45,9 +45,6 @@ const ViewSelector = styled.div<IViewSelector>`
         cursor: ${props => !props.selected ? `pointer` : `not-allowed`};
     }
 `
-const Button = styled.div`
-    display: inline-block;
-`
 
 const Contracts = (props: any) => {
     const [isLoading, setIsLoading] = useState(true)

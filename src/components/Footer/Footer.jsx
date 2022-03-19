@@ -5,8 +5,8 @@ import { RainbowText } from '@components/RainbowText'
 import { Donate } from '@components/Donate'
 
 const Container = styled.div`
-  background: #302244;
-  border-top: 2px solid #302266;
+  background: #000;
+  border-top: 2px solid #111;
   color: #FFF;
   min-height: 25vh;
   margin: 0;
@@ -24,11 +24,6 @@ const FootSubHeading = styled.h5`
     font-size: 16pt;
     font-weight: bold;
     margin: 2rem 0 1rem 0;
-`
-const ExternalLink = styled.a`
-    color: #DEDEDE;
-    text-decoration: underline;
-    text-decoration-style: dotted;
 `
 
 const Footer = () => (

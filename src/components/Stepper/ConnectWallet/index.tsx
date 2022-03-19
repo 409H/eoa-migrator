@@ -3,19 +3,22 @@ import styled from "styled-components"
 
 import { AppStateContext } from "../../../App"
 import { verifySignedMessage } from '../../../utils/signedMessage'
+import { ConnectWallet } from '@components/ConnectWallet'
 
 const Container = styled.div`
     padding: 0.25em;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     column-gap: 25px;
     align-items: flex-start;
-    margin: 0 20% 5.5em 0;
+    margin: 0 0 5.5em 0;
+`
+const ContainerBody = styled.div`
 `
 const Heading = styled.h3`
     font-weight: 500;
     font-size: 23pt;
-    margin: 0 0 1em 0;
+    margin: 0 0 0.5em 0;
 `
 const HeadingExtra = styled.span`
     font-weight: 200;
@@ -26,12 +29,15 @@ const Description = styled.p`
     text-align: left;
     padding: 0 2em;
 `
+const List = styled.ul`
+    padding: 0.25em 1em;
+    list-style-type: circle;
+`
 const Button = styled.div`
     display: block;
     margin: 1em 0;
     padding: 0.5em 1em;
-    background: #000;
-    border-radius: 8px;
+    background: #302266;
     color: #FFF;
     width: fit-content;
 
@@ -39,25 +45,13 @@ const Button = styled.div`
         cursor: pointer;
     }
 `
-const ConfirmArea = styled.div`
-    display: flex;
-    flex-direction: row;
-    row-gap: 25px;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 0 0 5.5em 0;
-`
-
 const ConfirmButton = styled(Button)`
-    width: 80%;
     background: #FFF;
     color: #000;
 `
 const TextArea = styled.textarea`
-    padding: 1em;
-    margin: 1em 2em;
-    width: 100%;
+    margin: 1em 0;
+    cols: 50;
 `
 const ErrorMessage = styled.div`
     display: block;
@@ -65,10 +59,10 @@ const ErrorMessage = styled.div`
     background: #BE5125;
     color: #FFF;
     padding: 0.25em;
-    margin: 1em 2em;
+    margin: 1em 0;
 `
 
-const VerifySafeAddress = (props: any) => {
+const ConnectWalletStep = (props: any) => {
     const [isChecked, setIsChecked] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const AppState = useContext(AppStateContext)
@@ -122,32 +116,24 @@ const VerifySafeAddress = (props: any) => {
 
     return(
         <Container>
-            <Heading>
-                2. Verify the ownership{' '}
-                <HeadingExtra>of the wallet you want to migrate to</HeadingExtra>
-            </Heading>
-            <Description>
-                You will need to configure a safe address to proceed with using the{' '}
-                application. To do this, you will need to sign a message with the{' '}
-                safe address so that we can be sure; you own the keys to the{' '}
-                identified migration addres, and that there is no clipboard malware changing{' '}
-                crypto address when you paste an address. <br /><br />
-                You can sign a message here: <a href="https://app.mycrypto.com/sign-message">https://app.mycrypto.com/sign-message</a>
-            </Description>
-
-            {error && <ErrorMessage>{error}</ErrorMessage>}
-
-            <TextArea ref={signedMessageRef} rows={15} cols={50} placeholder={`Input your Signed Message proof`}></TextArea>
-
-            <ConfirmArea>
-                <ConfirmButton onClick={() => setIsChecked(!isChecked)}>
-                    <input type="checkbox" checked={isChecked} />
-                    If I am migrating EOAs because my address is potentially compromised, I confirm that this safe address is not derived from the same <a href="https://metamask.zendesk.com/hc/en-us/articles/360060826432-What-is-a-Secret-Recovery-Phrase-and-how-to-keep-your-crypto-wallet-secure" target="_blank" rel="nofollow">SRP</a>.
-                </ConfirmButton>
-                <Button onClick={() => handleClick()}>Verify</Button>
-            </ConfirmArea>
+            <ContainerBody>
+                <Heading>
+                    1. Connect{' '}
+                    <HeadingExtra>the wallet with your assets</HeadingExtra>
+                </Heading>
+                <Description>
+                    This is your potentially compromised wallet. <br />
+                    Learn <a href="https://metamask.zendesk.com/hc/en-us/articles/360052511372-I-ve-been-Hacked-Scammed-Unauthorized-transactions-on-my-Account-" target="_blank" rel="nofollow">
+                                how to recognize if your wallet is compromised
+                    </a>.
+                </Description>
+            </ContainerBody>
+            <ConnectWallet
+                connect={props.connect}
+                reset={props.reset}
+            />
         </Container>
     )
 }
 
-export default VerifySafeAddress;
+export default ConnectWalletStep;

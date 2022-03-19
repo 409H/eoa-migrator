@@ -16,7 +16,7 @@ const Container = styled.div`
 
 const DonateValue = styled.div`
     padding: 0.5rem;
-    background: #3B2A53;
+    background: #222;
     border-radius: 0.5em;
     margin: 0 0.5em;
     font-weight: bold;
@@ -25,7 +25,7 @@ const DonateValue = styled.div`
 
     &:hover {
         cursor: pointer;
-        background: #4A3569;
+        background: #444;
     }
 `
 
