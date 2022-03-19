@@ -50,12 +50,12 @@ const Fullname = styled.div`
 const Description = styled.div`
     padding: 20px;
     margin-bottom: 10px;
-    font: 14px/20px "Lato", Arial, sans-serif;
+    font-weight: 200;
     color: #9E9E9E;
 `
 const SweepButton = styled.div<ISweepButton>`
     background: ${props => !props.txPending
-                    ? '#3B2A53' 
+                    ? '#000' 
                     : '#DEBC1F'
                 };
     width: 100%;
@@ -68,7 +68,7 @@ const SweepButton = styled.div<ISweepButton>`
     &:hover {
         cursor: ${props => !props.txPending ? 'pointer' : 'not-allowed'};
         background: ${props => !props.txPending
-                        ? '#3B2A53'
+                        ? '#000'
                         : '#DEBC1F'};
     }
 `
