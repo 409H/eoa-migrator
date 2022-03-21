@@ -84,6 +84,11 @@ const Token = (props: IProps) => {
     const { token, safeAddress } = props;
 
     const sweepAsset = async () => {
+        if(txPending) {
+            console.log(`There is a transaction pending to transfer the token balance!`);
+            return;
+        }
+
         const ABI = ["function transfer(address to, uint amount) returns (bool)"];
         const contract = new ethers.Contract(utils.getAddress(token.address), ABI, AppState.signer);
 

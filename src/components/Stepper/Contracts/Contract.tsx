@@ -86,6 +86,11 @@ const Contract = (props: IProps) => {
     }
 
     const transferOwnership = async () => {
+        if(txPending) {
+            console.log(`There is a transaction pending to transferOwnership of this contract!`);
+            return;
+        }
+
         const ABI = ["function transferOwnership(address _newOwner) external"];
         const instance = new ethers.Contract(utils.getAddress(contract.addr), ABI, AppState.signer);
 
