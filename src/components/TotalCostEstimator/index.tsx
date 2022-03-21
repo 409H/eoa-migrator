@@ -55,8 +55,8 @@ const TotalCostEstimator = (props: IProps) => {
         // Get the average
         return gas;
     }
-
-    const totalGas = BigNumber.from(avgGasLimit * totalTransactions).mul(gasAverage)
+    
+    const totalGas = BigNumber.from((avgGasLimit * totalTransactions).toString()).mul(Math.ceil(gasAverage))
 
     return(
         <Container>
