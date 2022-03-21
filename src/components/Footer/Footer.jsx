@@ -31,7 +31,14 @@ const Footer = () => (
       <FootHeading>
         <RainbowText text={`EOA Migrator`} />
       </FootHeading>
-      This service is provided as-is. There is no guarantees. <br />
+      EOA Migrator is a tool to help you discover different types of assets{' '}
+      that you have ownership to across multiple different EVM blockchains.
+      <br /><br />
+      This software is provided as-is.<br />
+      It is <a href="https://github.com/409H/eoa-migrator" target="_blank" rel="nofollow">open source</a>. 
+      There is no warranty. <br />
+      The authors do not assume any responsibility for bugs, vulnerabilities, or{' '} 
+      other technical defects.<br />
 
       <FootSubHeading>Donate</FootSubHeading>
       <small>Donate to help fund development.</small> <br />
