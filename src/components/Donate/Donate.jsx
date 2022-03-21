@@ -13,7 +13,11 @@ const Container = styled.div`
     flex-wrap: wrap;
     margin: 1em 0 0 0;
 `
-
+const Heading = styled.h5`
+    font-size: 16pt;
+    font-weight: bold;
+    margin: 2rem 0 1rem 0;
+`
 const DonateValue = styled.div`
     padding: 0.5rem;
     background: #222;
@@ -70,24 +74,28 @@ export default function Donate() {
     };
 
     return (
-        <Container>
-            <AppStateContext.Consumer>
-            {
-                context => {
-                    return DONATION.MAPPING.map((e) => {
-                        return (
-                            <DonateValue onClick={executeDonation(e.wei, e.msg, context.web3, context.userAddress)}>
-                                <CurrencyImg src={EthLogo} />
-                                <span>{e.name}</span>
-                            </DonateValue>
-                        )
-                    })
+        <>
+            <Heading>Donate</Heading>
+            <small>Donate to help fund development.</small> <br />
+            <Container>
+                <AppStateContext.Consumer>
+                {
+                    context => {
+                        return DONATION.MAPPING.map((e) => {
+                            return (
+                                <DonateValue onClick={executeDonation(e.wei, e.msg, context.web3, context.userAddress)}>
+                                    <CurrencyImg src={EthLogo} />
+                                    <span>{e.name}</span>
+                                </DonateValue>
+                            )
+                        })
+                    }
                 }
-            }
-            </AppStateContext.Consumer>
-            <Message>
-                {message}
-            </Message>
-        </Container>
+                </AppStateContext.Consumer>
+                <Message>
+                    {message}
+                </Message>
+            </Container>
+        </>
     )
 }
