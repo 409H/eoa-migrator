@@ -32,8 +32,8 @@ export const listErc20AssetsToSearch = async (chainId: number): Promise<ITokenLi
     return assets;
 }
 
-export const getUserErc20AssetBalances = async (rpcEndpoint: string, userAddress: string, chainId: number): Promise<IUserAssetsWithBalance> => {
-    const assets = await listErc20AssetsToSearch(chainId);
+export const getUserErc20AssetBalances = async (rpcEndpoint: string, userAddress: string, chainId: number, tokenListAssets: ITokenList[]|null): Promise<IUserAssetsWithBalance> => {
+    const assets = tokenListAssets ?? await listErc20AssetsToSearch(chainId);
     const assetAddresses = assets.map(asset => asset.address) 
 
     const contractAddressForChain = CONFIG.ETH_SCAN.filter((es: {chainId: number, contractAddress: string}) => es.chainId === chainId)[0].contractAddress

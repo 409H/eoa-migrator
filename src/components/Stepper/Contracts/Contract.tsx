@@ -7,6 +7,8 @@ import CONFIG from "@config"
 import { IChain, IContract } from "./types"
 import { AppStateContext } from "../../../App"
 
+import { checkIfEip173, getContractOwner } from "../../../utils/contracts"
+
 interface ITransferButton {
     txPending: boolean;
 }
@@ -62,27 +64,27 @@ interface IProps {
 const Contract = (props: IProps) => {
     const AppState = useContext(AppStateContext)
     const [hasCheckedIfEip173, setHasCheckedIfEip173] = useState<boolean>(false)
-    const [isEip173TransferEnabled, setIsEip173TransferEnabled] = useState<null | boolean>(null)
+    const [isContractOwner, setIsContractOwner] = useState<boolean>(false)
     const [txPending, setTxPending] = useState<boolean>(false);
     const { contract, safeAddress } = props;
     const { CHAINS } = CONFIG;
 
-    const checkIfEip173 = async() => {
-        const ABI = ["function owner() external view returns (address)"];
-        const instance = new ethers.Contract(utils.getAddress(contract.addr), ABI, AppState.provider);
-        
-        let owner;
-        try {
-            owner = await instance.owner();
-        } catch(e) {
+    const isEip173 = async() => {
+        const isEip173 = await checkIfEip173(AppState.provider, utils.getAddress(contract.addr));
+        let owner = await getContractOwner(AppState.provider, utils.getAddress(contract.addr));
+
+        if(!isEip173) {
             console.log(`${contract.addr} does not seem to be EIP173. Cannot transfer ownership!`)
             setHasCheckedIfEip173(true)
-            setIsEip173TransferEnabled(false)
             return;
         }
 
+        if(owner === null) {
+            owner = "0x"
+        }
+
         setHasCheckedIfEip173(true)
-        setIsEip173TransferEnabled(utils.getAddress(owner) !== utils.getAddress(AppState.userAddress))
+        setIsContractOwner(utils.getAddress(owner as string) === utils.getAddress(AppState.userAddress))
     }
 
     const transferOwnership = async () => {
@@ -117,7 +119,7 @@ const Contract = (props: IProps) => {
                 // We haven't checked the contract ownership yet
                 !hasCheckedIfEip173 
                 && <TransferButton
-                        onClick={() => checkIfEip173()}
+                        onClick={() => isEip173()}
                         txPending={txPending}>
                             Check EIP173
                     </TransferButton>
@@ -125,18 +127,18 @@ const Contract = (props: IProps) => {
 
             {
                 // We have checked the contract ownership
-                // and it can not be transferred
-                hasCheckedIfEip173  && !isEip173TransferEnabled
+                // and they are not the current owner
+                hasCheckedIfEip173  && !isContractOwner
                 && <TransferButton
                         txPending={txPending}>
-                            Not EIP173 - No Ownership
+                            You are not the owner
                     </TransferButton>
             }
 
             {
                 // We have checked the contract ownership
                 // and it can be transferred
-                hasCheckedIfEip173 && isEip173TransferEnabled
+                hasCheckedIfEip173 && isContractOwner
                 && <TransferButton
                         onClick={() => transferOwnership()}
                         txPending={txPending}>
