@@ -4,6 +4,7 @@ import { ethers, utils } from "ethers"
 
 import CONFIG from "@config"
 import { AppStateContext } from "../../../App"
+import Loading from "@components/Loading"
 
 import Contract from "./Contract"
 import { IChain } from "./types"
@@ -12,9 +13,6 @@ interface IViewSelector {
     selected: boolean;
 }
 
-const Loading = styled.img`
-    display: block;
-`
 const TotalCreated = styled.div`
     margin: 0.5em 0;
 `
@@ -141,9 +139,6 @@ const Contracts = (props: any) => {
                             safeAddress={props.safeAddress}
                             contract={e}
                         />
-                        // <Item key={e.hash}>
-                        //     <a href={`${endpoint}/${e.hash}`} target="_blank" rel="nofollow noreferer">{e.addr}</a> (Block: {e.block}) <Button onClick={() => checkIfEip173(e.addr)}>Check</Button>
-                        // </Item>
                     )})
                 }
             </ItemList>)
@@ -155,7 +150,7 @@ const Contracts = (props: any) => {
 
     const renderResults = () => {
         if(isLoading) {
-            return(<>Fetching Data...<br /></>)
+            return(<Loading text={`Fetching data...`} />)
         }
 
         if(error.length > 0) {
