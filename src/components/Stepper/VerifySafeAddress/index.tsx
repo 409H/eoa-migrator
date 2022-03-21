@@ -48,7 +48,6 @@ const ConfirmArea = styled.div`
     align-items: center;
     margin: 0 0 5.5em 0;
 `
-
 const ConfirmButton = styled(Button)`
     width: 80%;
     background: #FFF;
