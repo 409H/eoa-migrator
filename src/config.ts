@@ -23,16 +23,6 @@ const CONFIG = {
             }
         ]
     },
-    ETH_SCAN: [{
-        "chainId": 1,
-        "contractAddress": "0x08A8fDBddc160A7d5b957256b903dCAb1aE512C5"
-    }, {
-        "chainId": 56,
-        "contractAddress": "0x83cb147c13cba4ba4a5228bfde42c88c8f6881f6"
-    }, {
-        "chainId": 137,
-        "contractAddress": "0xc60ca833aef1911c17d4e69fda9de6850402f6e5"
-    }],
     CHAINS: [{
         chainId: 1,
         name: "Ethereum",
@@ -69,6 +59,31 @@ const CONFIG = {
         rpc: `https://polygon-rpc.com`,
         gas: `https://api.polygonscan.com/api?module=gastracker&action=gasoracle&apikey={apikey}`,
         ticker: `MATIC`
+    }, {
+        chainId: 42,
+        name: "Kovan",
+        bg: "#dccff1",
+        color: "#212121",
+        api: `https://api-kovan.etherscan.io/api?module=account&action=txlist&address={address}&startblock=0&endblock=99999999&page=1&offset=0&sort=asc&apikey={apikey}`,
+        default_api_key: `KFS4CK4IZ3MN4HUHKYS638TUCK8F4N91MP`,
+        explorer_tx: `https://kovan.etherscan.io/tx/`,
+        explorer_addr: `https://kovan.etherscan.io/address/`,
+        rpc: `https://api.mycryptoapi.com/eth`,
+        gas: ``,
+        ticker: `KOV`
+    }],
+    ETH_SCAN: [{
+        chainId: 1,
+        contractAddress: "0x08A8fDBddc160A7d5b957256b903dCAb1aE512C5"
+    }, {
+        chainId: 56,
+        contractAddress: "0x83cb147c13cba4ba4a5228bfde42c88c8f6881f6"
+    }, {
+        chainId: 137,
+        contractAddress: "0xc60ca833aef1911c17d4e69fda9de6850402f6e5"
+    }, {
+        chainId: 42,
+        contractAddress: "0x08A8fDBddc160A7d5b957256b903dCAb1aE512C5"
     }],
     TOKENS: {
         ENDPOINTS: [{
@@ -80,6 +95,9 @@ const CONFIG = {
         }, {
             chainId: 137,
             endpoint: "https://unpkg.com/quickswap-default-token-list@1.2.18/build/quickswap-default.tokenlist.json"
+        }, {
+            chainId: 42,
+            endpoint: "https://tokens.coingecko.com/uniswap/all.json"
         }],
         ADDITIONAL_TOKENS: [{
             chainId: 56,
@@ -101,16 +119,16 @@ const CONFIG = {
             logoURI: ""
         }, {
             chainId: 42,
-            name: "Kovan",
-            bg: "#dccff1",
-            color: "#212121",
-            api: `https://api-kovan.etherscan.io/api?module=account&action=txlist&address={address}&startblock=0&endblock=99999999&page=1&offset=0&sort=asc&apikey={apikey}`,
-            default_api_key: `KFS4CK4IZ3MN4HUHKYS638TUCK8F4N91MP`,
-            explorer_tx: `https://kovan.etherscan.io/tx/`,
-            explorer_addr: `https://kovan.etherscan.io/address/`,
-            rpc: `https://api.mycryptoapi.com/eth`,
-            gas: ``,
-            ticker: `KOV`
+            address: "0xa36085F69e2889c224210F603D836748e7dC0088",
+            symbol: "LINK",
+            decimals: 18,
+            logoURI: ""
+        }, {
+            chainId: 42,
+            address: "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa",
+            symbol: "DAI",
+            decimals: 18,
+            logoURI: ""
         }]
     }
 }
