@@ -16,7 +16,8 @@
       "@app": ["App.jsx"],
       "@contracts/*": ["contracts/*"],
       "@config": ["config.ts"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@utils/*": ["utils/*"]
     },
     "plugins": [
       {

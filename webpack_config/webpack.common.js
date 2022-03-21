@@ -38,6 +38,7 @@ module.exports = {
       '@contracts': path.resolve(config.path.src, 'contracts'),
       '@config': path.resolve(config.path.src, 'config.ts'),
       '@assets': path.resolve(config.path.src, 'assets'),
+      '@utils': path.resolve(config.path.src, 'utils'),
     },
     fallback: {
       "vm": require.resolve("vm-browserify"),
