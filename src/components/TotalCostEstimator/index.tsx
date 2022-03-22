@@ -39,6 +39,10 @@ const TotalCostEstimator = (props: IProps) => {
 
     const getCurrentGasPrice = async() => {
         // Get the gas oracle
+        if(chainInfo.gas === "") {
+            return 
+        }
+        
         const gas = await fetch(chainInfo.gas.replace("{apikey}", chainInfo.default_api_key))
             .then(response => response.json())
                 .then(data => {
@@ -51,8 +55,8 @@ const TotalCostEstimator = (props: IProps) => {
         // Get the average
         return gas;
     }
-
-    const totalGas = BigNumber.from(avgGasLimit * totalTransactions).mul(gasAverage)
+    
+    const totalGas = BigNumber.from((avgGasLimit * totalTransactions).toString()).mul(Math.ceil(gasAverage))
 
     return(
         <Container>

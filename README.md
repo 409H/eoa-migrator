@@ -43,6 +43,10 @@ As requests to third parties are not proxied (and thus cached), there can be ins
 
 In the future, we do plan to proxy third-party requests so that we can have better responses from third-parties.
 
-### EIP-17
+### EIP-173
 
 Currently, the owned contracts checked for EIP173 interface only. It does this by calling `owner()` on the contract and if it is successful, it assumes EIP173 interface and allows you to call `transferOwnership()`.
+
+### Gas estimation
+
+On some assets views, the application will give you a rough gas estimation on all the transactions you'll need to perform on all the assets you have of that type. This is a _very rough_ gas estimation and uses a static `gas limit` to calculate. The math is `(gas limit * number of assets) * gas safe low`.

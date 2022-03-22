@@ -11,6 +11,7 @@ import { checkIfEip173, getContractOwner } from "../../../utils/contracts"
 
 interface ITransferButton {
     txPending: boolean;
+    bgColor: string;
 }
 
 const Container = styled.div`
@@ -38,8 +39,10 @@ const Description = styled.div`
 `
 const TransferButton = styled.div<ITransferButton>`
     background: ${props => !props.txPending
-                    ? '#3B2A53' 
-                    : '#DEBC1F'
+                    ? 
+                        props.bgColor
+                    : 
+                    '#DEBC1F'
                 };
     width: 100%;
     color: #FFF;
@@ -51,7 +54,7 @@ const TransferButton = styled.div<ITransferButton>`
     &:hover {
         cursor: ${props => !props.txPending ? 'pointer' : 'not-allowed'};
         background: ${props => !props.txPending
-                        ? '#3B2A53'
+                        ? props.bgColor
                         : '#DEBC1F'};
     }
 `
@@ -65,6 +68,7 @@ const Contract = (props: IProps) => {
     const AppState = useContext(AppStateContext)
     const [hasCheckedIfEip173, setHasCheckedIfEip173] = useState<boolean>(false)
     const [isContractOwner, setIsContractOwner] = useState<boolean>(false)
+    const [isEip173Interface, setIsEip173Interface] = useState<boolean>(false)
     const [txPending, setTxPending] = useState<boolean>(false);
     const { contract, safeAddress } = props;
     const { CHAINS } = CONFIG;
@@ -84,6 +88,7 @@ const Contract = (props: IProps) => {
         }
 
         setHasCheckedIfEip173(true)
+        setIsEip173Interface(true)
         setIsContractOwner(utils.getAddress(owner as string) === utils.getAddress(AppState.userAddress))
     }
 
@@ -119,6 +124,7 @@ const Contract = (props: IProps) => {
                 // We haven't checked the contract ownership yet
                 !hasCheckedIfEip173 
                 && <TransferButton
+                        bgColor={`#3B2A53`}
                         onClick={() => isEip173()}
                         txPending={txPending}>
                             Check EIP173
@@ -127,10 +133,24 @@ const Contract = (props: IProps) => {
 
             {
                 // We have checked the contract ownership
-                // and they are not the current owner
-                hasCheckedIfEip173  && !isContractOwner
+                // and it is not EIP173
+                hasCheckedIfEip173  && !isEip173Interface
                 && <TransferButton
-                        txPending={txPending}>
+                        txPending={txPending}
+                        bgColor={`#de1f51`}
+                    >
+                            Contract is not Ownable
+                    </TransferButton>
+            }
+
+            {
+                // We have checked the contract ownership
+                // and they are not the current owner
+                hasCheckedIfEip173  && isEip173Interface && !isContractOwner
+                && <TransferButton
+                        txPending={txPending}
+                        bgColor={`#de1f51`}
+                    >
                             You are not the owner
                     </TransferButton>
             }
@@ -141,7 +161,9 @@ const Contract = (props: IProps) => {
                 hasCheckedIfEip173 && isContractOwner
                 && <TransferButton
                         onClick={() => transferOwnership()}
-                        txPending={txPending}>
+                        txPending={txPending}
+                        bgColor={`#1fde24`}
+                    >
                             Transfer Ownership
                     </TransferButton>
             }

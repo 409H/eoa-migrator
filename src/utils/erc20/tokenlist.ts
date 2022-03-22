@@ -5,7 +5,10 @@ import CONFIG from "@config"
 
 export const listErc20AssetsToSearch = async (chainId: number): Promise<ITokenList[]> => {
     const { TOKENS } = CONFIG;
-    const response = await fetch(TOKENS.ENDPOINT)
+
+    // Fetch the endpoint
+    const ENDPOINT = TOKENS.ENDPOINTS.find((chain: {chainId: number, endpoint: string}) => chain.chainId === chainId)
+    const response = await fetch(ENDPOINT.endpoint)
 
     // Check the response of the HTTP request
     if(!response.ok) {
