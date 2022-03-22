@@ -5,19 +5,15 @@ import styled from 'styled-components';
 import { RainbowText } from '@components/RainbowText'
 
 const Container = styled.div`
-  margin: 0.5em;
-  width: 300px;
-
-  @media only screen and (max-width : 992px) {
-    width: 100%;
-  }
+  margin: 0;
+  padding: 0;
 `
 const AddressWrapper = styled.div`
-  padding: 5px;
-  background-color: #302244;
+  padding: 2rem 5rem;
+  background-color: #000;
   border: 5px solid transparent;
   border-image-slice: 1;
-  width: auto;
+  width: fit-content;
   font-size: 12pt;
   display: flex;
   align-items: center;
@@ -25,27 +21,22 @@ const AddressWrapper = styled.div`
   row-gap: 10px;
   column-gap: 10px;
   border-radius: 0.5rem;
-`
-const UserAvatar = styled.img`
-  height: 40px;
-  width: 40px;
-  margin: 0.5rem;
-  background-image: url("${props => props.src ?? ''}");
-  background-color: #CCC;
-  border-radius: 50%;
-  order: 0;
   flex-direction: column;
 `
 const UserAddress = styled(RainbowText)`
-  flex-direction: column;
-  order: 1;
-  flex-grow: 5;
+  font-size: 13px;
 `;
 const DisconnectButton = styled.div`
-  flex-direction: row;
-  font-size: 12pt;
-  text-align: right;
-  order: 3;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 300;
+  display: block;
+  line-height: 0px;
+  padding: 11px 3px; 
+
+  &:before {
+    content: "Disconnect";
+  }
 
   &:hover {
     cursor: pointer;
@@ -53,17 +44,16 @@ const DisconnectButton = styled.div`
 `
 const ConnectWrapper = styled.div`
   padding: 2rem 5rem;
-  background-color: #302244;
+  background-color: #000;
   border: 2px solid transparent;
   border-image-slice: 1;
-  width: auto;
+  width: fit-content;
   font-size: 14pt;
   border-radius: 0.5rem;
-  font-weight: bold;
+  font-weight: 300;
 
   &:hover {
     cursor: pointer;
-    background: #3B2A53;
   }
 `
 
@@ -75,9 +65,8 @@ const ConnectWallet = ({ connect, reset }) => (
           return context.connected
             ?
               <AddressWrapper>
-                <UserAvatar src={context.userEnsAvatar} />
                 <UserAddress text={context.formattedUserAddress} />
-                <DisconnectButton onClick={reset}>Disconnect</DisconnectButton>
+                <DisconnectButton onClick={reset} />
               </AddressWrapper>
             :
               <ConnectWrapper onClick={connect}>

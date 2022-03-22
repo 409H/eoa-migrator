@@ -12,11 +12,22 @@ import { ethers, utils } from 'ethers';
 import CONFIG from '@config';
 
 const Container = styled.div`
-  background: #FEFEFE;
+  background: #E5E5E5;
+  min-height: 75vh;
+
+  display: flex;
+  flex-direction: row;
+`
+const SideBar = styled.div`
+  min-width: 20%;
+  max-width: 20%;
   min-height: 75vh;
 `
 const MainBody = styled.div`
+  width: 100%;
   padding: 1rem;
+  max-width: 100%;
+  min-height: 75vh;
 `
 
 const INITIAL_STATE = {
@@ -130,14 +141,16 @@ class App extends React.Component {
     return (
       <AppStateContext.Provider value={this.state}>
         <Container>
-          <Hero 
-            connect={this.onConnect}
-            reset={this.resetApp}
-          />
+          <SideBar>
+            <Hero />
+          </SideBar>
           <MainBody>
             {
               this.supportedChain()
-              ? <Stepper />
+              ? <Stepper 
+                  connect={this.onConnect}
+                  reset={this.resetApp}
+                />
               : <NotSupportedChain />
             }
           </MainBody>

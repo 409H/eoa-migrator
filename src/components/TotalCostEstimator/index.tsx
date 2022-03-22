@@ -6,9 +6,19 @@ import CONFIG from "@config"
 import { AppStateContext } from "@app"
 import { IChain } from "../Stepper/ERC20/types"
 
-const Container = styled.div`
+interface IContainer {
+    color: string;
+}
+
+const Container = styled.div<IContainer>`
     display: block;
-    margin: 1em 0;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 0 5.5em 0;
+    background: #FFF;
+    border-left: 3px solid ${props => props.color};
+    padding: 0.25em;
+    border-radius: 0 8px 8px 0;
 `
 
 interface IProps {
@@ -59,7 +69,7 @@ const TotalCostEstimator = (props: IProps) => {
     const totalGas = BigNumber.from((avgGasLimit * totalTransactions).toString()).mul(Math.ceil(gasAverage))
 
     return(
-        <Container>
+        <Container color={chainInfo.bg}>
             It will cost approximately { utils.formatUnits(totalGas, 9) } {chainInfo.ticker} to transfer all of these assets (at current average gas price)!
         </Container>
     )

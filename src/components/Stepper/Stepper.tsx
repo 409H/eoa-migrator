@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components"
 
+import ConnectWalletStep from "./ConnectWallet";
 import SafeAddressPanel from "../SafeAddressPanel"
 import VerifySafeAddress from "./VerifySafeAddress"
 import ERC20 from "./ERC20"
@@ -12,18 +13,31 @@ interface IStep {
     canSelect: boolean;
 }
 
+const Container = styled.div`
+    padding: 5% 5%;
+`
+const Heading = styled.h3`
+    font-weight: 500;
+    font-size: 23pt;
+    margin: 0 0 0.5em 0;
+`
+const HeadingExtra = styled.span`
+    font-weight: 200;
+`
 const Steps = styled.div`
+    width: 100%;
     display: block;
     border: 1px solid #999;
-    width: fit-content;
     padding: 0 2em;
     margin: 2em 0;
 `
 const Step = styled.li<IStep>`
+    width: 33%;
     display: inline-block;
-    padding: 0.5em 1em;
-    background: ${props => props.selected ? `#302244` : `transparent`};
-    color: ${props => props.selected ? `#FFFFFF` : `inherit`};
+    text-align: center;
+    padding: 1em 0;
+    background: ${props => props.selected ? `#FFF` : `#F1F1F1`};
+    color: ${props => props.selected ? `#111` : `inherit`};
 
     :hover {
         cursor: ${props => props.canSelect ? `pointer` : `not-allowed`};
@@ -43,11 +57,11 @@ const DEFAULT_STATE = {
     safeAddress: "0x0000000000000000000000000000000000000000"
 }
 
-class Stepper extends React.Component<{}, IState> {
+class Stepper extends React.Component<{ connect: any, reset: any }, IState> {
     state: IState = DEFAULT_STATE;
 
-    constructor() {
-        super({});
+    constructor(connect: any, reset: any) {
+        super({ connect, reset});
         this.updateState = this.updateState.bind(this)
     }
 
@@ -63,12 +77,17 @@ class Stepper extends React.Component<{}, IState> {
         switch(step) {
             default :
             case 0 :
-                return(<VerifySafeAddress 
-                            callback={this.updateState} 
-                        />)
+                return(<>
+                            <ConnectWalletStep
+                                connect={this.props.connect}
+                                reset={this.props.reset}    
+                            />
+                            <VerifySafeAddress 
+                                callback={this.updateState} 
+                            />
+                        </>)
             case 1 :
                 return(<>
-                            <SafeAddressPanel  safeAddress={this.state.safeAddress} />
                             <ERC20 
                                 callback={this.updateState} 
                                 safeAddress={this.state.safeAddress}
@@ -76,7 +95,6 @@ class Stepper extends React.Component<{}, IState> {
                         </>)
             case 2 :
                 return(<>
-                            <SafeAddressPanel  safeAddress={this.state.safeAddress} />
                             <Nft
                                 callback={this.updateState} 
                                 safeAddress={this.state.safeAddress}
@@ -84,7 +102,6 @@ class Stepper extends React.Component<{}, IState> {
                         </>)
             case 3 :
                 return(<>
-                            <SafeAddressPanel  safeAddress={this.state.safeAddress} />
                             <Contracts
                                 callback={this.updateState} 
                                 safeAddress={this.state.safeAddress}
@@ -94,48 +111,49 @@ class Stepper extends React.Component<{}, IState> {
     }
 
     render() {
-        return(<>
-            <Steps>
-                <Step 
-                    onClick={() => this.state.step > 0 && this.updateState({nextStep: 0})} 
-                    selected={this.state.step == 0}
-                    canSelect={this.state.step > 0}
-                    key={0}
-                >
-                    Configure Safe Address
-                </Step>
-                <Step
-                    onClick={() => this.state.step > 0 && this.updateState({nextStep: 1})} 
-                    selected={this.state.step == 1}
-                    canSelect={this.state.step > 0}
-                    key={1}
-                >
-                    Sweep ERC20 Assets
-                </Step>
-                <Step 
-                    onClick={() => this.state.step > 0 && this.updateState({nextStep: 2})} 
-                    selected={this.state.step == 2}
-                    canSelect={this.state.step > 0}
-                    key={2}
-                >
-                    Sweep ERC721 / ERC1115 Assets
-                </Step>
-                <Step  
-                    onClick={() => this.state.step > 0 && this.updateState({nextStep: 3})} 
-                    selected={this.state.step == 3}
-                    canSelect={this.state.step > 0}
-                    key={3}
-                >
-                    Reconfigure Contract Ownerships
-                </Step>
-            </Steps>
+        return(<Container>
 
-            
+            { this.state.step > 0 && <>
+                <Heading>
+                    3. Migrate Assets
+                </Heading>
+                <SafeAddressPanel disconnect={this.props.reset} callback={this.updateState} safeAddress={this.state.safeAddress} />
+            </>}
+
+            { 
+                this.state.step > 0 &&
+                    <Steps>
+                        <Step
+                            onClick={() => this.state.step > 0 && this.updateState({nextStep: 1})} 
+                            selected={this.state.step == 1}
+                            canSelect={this.state.step > 0}
+                            key={1}
+                        >
+                            ERC20 Assets
+                        </Step>
+                        <Step 
+                            onClick={() => this.state.step > 0 && this.updateState({nextStep: 2})} 
+                            selected={this.state.step == 2}
+                            canSelect={this.state.step > 0}
+                            key={2}
+                        >
+                            ERC721 / ERC1115 Assets
+                        </Step>
+                        <Step  
+                            onClick={() => this.state.step > 0 && this.updateState({nextStep: 3})} 
+                            selected={this.state.step == 3}
+                            canSelect={this.state.step > 0}
+                            key={3}
+                        >
+                            Contract Ownership
+                        </Step>
+                    </Steps>
+            }
 
             <ActionContainer>
                 {this.renderSwitch(this.state.step)}
             </ActionContainer>
-        </>)
+        </Container>)
     }
 }
 

@@ -4,6 +4,7 @@ import { ethers, utils } from "ethers"
 
 import CONFIG from "@config"
 import { AppStateContext } from "../../../App"
+import Loading from "@components/Loading"
 
 import Contract from "./Contract"
 import { IChain } from "./types"
@@ -12,9 +13,6 @@ interface IViewSelector {
     selected: boolean;
 }
 
-const Loading = styled.img`
-    display: block;
-`
 const TotalCreated = styled.div`
     margin: 0.5em 0;
 `
@@ -44,9 +42,6 @@ const ViewSelector = styled.div<IViewSelector>`
     :hover {
         cursor: ${props => !props.selected ? `pointer` : `not-allowed`};
     }
-`
-const Button = styled.div`
-    display: inline-block;
 `
 
 const Contracts = (props: any) => {
@@ -155,7 +150,7 @@ const Contracts = (props: any) => {
 
     const renderResults = () => {
         if(isLoading) {
-            return(<>Fetching Data...<br /></>)
+            return(<Loading text={`Fetching data...`} />)
         }
 
         if(error.length > 0) {

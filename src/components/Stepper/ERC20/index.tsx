@@ -6,9 +6,9 @@ import CONFIG from "@config"
 
 import Token from "./Token"
 import TotalCostEstimator from "@components/TotalCostEstimator"
+import Loading from "@components/Loading"
 
 import { getUserErc20AssetBalances } from '../../../utils/erc20'
-import { RainbowText } from "../../RainbowText"
 import { ITokenList } from "../../../utils/erc20/types"
 import { IChain, IGetTokenBalances } from "./types"
 
@@ -18,9 +18,6 @@ const Container = styled.div`
 const Heading = styled.h3`
     font-size: 23pt;
     margin: 0 0 1em 0;
-`
-const Loading = styled.div`
-    margin: 0.25em;
 `
 
 const ERC20 = (props: any) => {
@@ -81,9 +78,7 @@ const ERC20 = (props: any) => {
     const renderLoadingOrTokens = () => {
         if(loading) {
             return(
-                <Loading>
-                    <RainbowText text={`Fetching Tokens. Please sit tight!`} />
-                </Loading>
+                <Loading text={`Fetching Tokens. Please sit tight!`} />
             )
         }
 
