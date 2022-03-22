@@ -120,6 +120,8 @@ class Stepper extends React.Component<{ connect: any, reset: any }, IState> {
                 <SafeAddressPanel disconnect={this.props.reset} callback={this.updateState} safeAddress={this.state.safeAddress} />
             </>}
 
+           Env: {process.env.REACT_APP_ETHERSCAN_API_KEY}
+
             { 
                 this.state.step > 0 &&
                     <Steps>
