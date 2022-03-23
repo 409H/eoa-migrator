@@ -1,7 +1,6 @@
 const webpack = require("webpack");
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 
 const config = require('./config');
 
@@ -60,7 +59,6 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
-    new Dotenv(),
     new HtmlWebpackPlugin({
       template: path.resolve(config.path.src, 'index.html'),
       inject: true,
@@ -76,6 +74,6 @@ module.exports = {
     }),
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
-    }),
+    })
   ]
 };

@@ -57,7 +57,7 @@ const Footer = () => (
           <li>@MyCrypto/eth-scan</li>  
           <li>TokenLists (CoinGecko, Uniswap, PancakeSwap, Quickswap)</li>
           <li>Etherscan (PolygonScan, BscScan)</li>
-          <li>MyCryptoAPI, BSC-DataSeed, Polygon-RPC</li>
+          <li>Infura, BSC-DataSeed, MyCryptoAPI, Polygon-RPC</li>
         </ul>
       </FootContent>
 
