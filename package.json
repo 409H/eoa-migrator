@@ -34,8 +34,8 @@
     "web3modal": "^1.9.4"
   },
   "scripts": {
-    "start": "APP_ENV=local webpack serve --config ./webpack_config/webpack.dev.js",
-    "build": "APP_ENV=prod webpack --config ./webpack_config/webpack.prod.js",
+    "start": "webpack serve --config ./webpack_config/webpack.dev.js",
+    "build": "webpack --config ./webpack_config/webpack.prod.js",
     "test:components": "react-scripts test",
     "test": "NODE_PATH=. TS_NODE_PROJECT='./test/tsconfig.json' mocha -r tsconfig-paths/register --timeout 10000 'test/**/*.ts'",
     "eject": "react-scripts eject"
@@ -71,7 +71,6 @@
     "assert": "^2.0.0",
     "babel-plugin-styled-components": "^1.13.2",
     "css-loader": "^6.2.0",
-    "dotenv-webpack": "^7.1.0",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.24.2",
