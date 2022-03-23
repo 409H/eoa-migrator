@@ -60,7 +60,9 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
-    new Dotenv(),
+    new Dotenv({
+      systemvars: true
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(config.path.src, 'index.html'),
       inject: true,
