@@ -164,7 +164,7 @@ const CONFIG = {
             endpoint: ""
         }, {
             chainId: 4,
-            endpoint: "http://localhost:8000/wallet/nfts/?address={address}&network=4"
+            endpoint: "https://eoa-migrator-api.herokuapp.com/wallet/nfts/?address={address}&network=4"
         }]
     }
 }
