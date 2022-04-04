@@ -28,7 +28,7 @@ const Nft = (props: any) => {
     const [tokens, setTokens] = useState([])
 
     const AppState = useContext(AppStateContext)
-    const { CHAINS } = CONFIG
+    const { NFTS } = CONFIG
 
     // Fetch the endpoint for the selected chain
     useEffect(() => {
@@ -52,7 +52,7 @@ const Nft = (props: any) => {
     }, [AppState]);
 
     const getEndpointForChain = () => {
-        const chain = CONFIG.NFTS.ENDPOINTS.filter((endpoint: INftEndpoints) => endpoint.chainId === AppState.chainId)[0]
+        const chain = NFTS.ENDPOINTS.filter((endpoint: INftEndpoints) => endpoint.chainId === AppState.chainId)[0]
         return chain.endpoint
     }
 
@@ -61,33 +61,35 @@ const Nft = (props: any) => {
         const ENDPOINT = getEndpointForChain()
         setNotSupported(false);
 
-        if(ENDPOINT === "") {
-            // Not Supported!
-            setNotSupported(true);
-            return {
-                tokens: [],
-                provider: null,
-                loading: false,
-                error: null
-            }
+        let ret: IGetUserNFTs = {
+            tokens: [],
+            provider: null,
+            loading: false,
+            error: null
         }
 
         try {
             NftsForAddress = await getUserNftsFromApi(ENDPOINT, AppState.userAddress);
         } catch(e) {
-            console.log(e);
+            switch(e.message) {
+                case "ERR_NO_DATA_PROVIDER" :
+                    setNotSupported(true)
+                break;
+                default: 
 
-            let ret: IGetUserNFTs = {
-                tokens: [],
-                provider: null,
-                loading: false,
-                error: e.message
+                (ret as IGetUserNFTs) = {
+                    tokens: [],
+                    provider: null,
+                    loading: false,
+                    error: e.message
+                }
+
             }
 
             return ret;
         }
 
-        let ret: IGetUserNFTs = {
+        (ret as IGetUserNFTs) = {
             tokens: NftsForAddress.data.collections,
             provider: NftsForAddress.data.provider,
             loading: false,

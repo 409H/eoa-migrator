@@ -10,8 +10,14 @@ export const getUserNftsFromApi = async (apiEndpoint: string, userAddress: strin
     if(!response.ok) {
         const body = await response.text();
         const bodyres = JSON.parse(body);
-        console.log(bodyres)
-        throw new Error(`Unable to fetch nfts. HTTP Status ${response.status} - ${bodyres.code}`)
+
+        // Try to gracefully handle the error
+        switch(bodyres.code) {
+            case "ERR_NO_DATA_PROVIDER" :
+                throw new Error(bodyres.code)
+            default: 
+                throw new Error(`Unable to fetch nfts. HTTP Status ${response.status} - ${bodyres.message} (${bodyres.code}})`)
+        }
     }
 
     // Check the response body

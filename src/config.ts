@@ -152,16 +152,16 @@ const CONFIG = {
     NFTS: {
         ENDPOINTS: [{
             chainId: 1,
-            endpoint: "",
+            endpoint: "https://eoa-migrator-api.herokuapp.com/wallet/nfts?address={address}&network=1",
         }, {
             chainId: 56,
-            endpoint: ""
+            endpoint: "https://eoa-migrator-api.herokuapp.com/wallet/nfts?address={address}&network=56"
         }, {
             chainId: 137,
-            endpoint: ""
+            endpoint: "https://eoa-migrator-api.herokuapp.com/wallet/nfts?address={address}&network=137"
         }, {
             chainId: 42,
-            endpoint: ""
+            endpoint: "https://eoa-migrator-api.herokuapp.com/wallet/nfts?address={address}&network=42"
         }, {
             chainId: 4,
             endpoint: "https://eoa-migrator-api.herokuapp.com/wallet/nfts?address={address}&network=4"
