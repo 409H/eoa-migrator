@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react"
-import styled from "styled-components"
+import React from "react"
 
 import { IResponseFromNftApi_Data_Collections, IResponseFromNftApi_Data_Assets } from "../../../utils/nfts/types"
 
