@@ -33,7 +33,7 @@ const ChainNotSupported = () => {
             </Heading>
             <Description>
                 Finding a data provider for NFTs for this chain is proving hard.{' '}
-                Please <a href="https://github.com/409H/eoa-migrator/issues/new" target="_blank" rel="nofollow">Open an Issue</a> if you can suggest one.
+                Please <a href="https://github.com/409H/eoa-migrator-api/issues/new" target="_blank" rel="nofollow">Open an Issue</a> if you can suggest one.
             </Description>
         </Container>
     )
