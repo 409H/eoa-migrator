@@ -53,17 +53,26 @@ const TotalCostEstimator = (props: IProps) => {
             return 
         }
         
-        const gas = await fetch(chainInfo.gas.replace("{apikey}", chainInfo.default_api_key))
-            .then(response => response.json())
-                .then(data => {
-                    return data.result.SafeGasPrice
-                })
-                .catch((e) => {
-                    console.log(e)
-                })
-       
-        // Get the average
-        return gas;
+        const response = await fetch(chainInfo.gas)
+
+        if(!response.ok) {
+            const body = await response.text();
+            const res = JSON.parse(body);
+
+            // Try to gracefully handle the error
+            switch(res.code) {
+                case "ERR_NO_DATA_PROVIDER" :
+                    throw new Error(res.code)
+                default:
+                    throw new Error(`Unable to fetch gas data. HTTP status code ${response.status} - ${res.message} - (${res.code})`)
+            }
+        }
+
+        // Chheck the response body
+        const resp = await response.text();
+        const res = JSON.parse(resp);
+
+        return res.data.gas.safe;
     }
     
     const totalGas = BigNumber.from((avgGasLimit * totalTransactions).toString()).mul(Math.ceil(gasAverage))

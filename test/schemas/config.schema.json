@@ -78,9 +78,6 @@
                     "api": {
                         "type": "string"
                     },
-                    "default_api_key": {
-                        "type": "string"
-                    },
                     "explorer_tx": {
                         "type": "string"
                     },
@@ -103,7 +100,6 @@
                     "bg",
                     "color",
                     "api",
-                    "default_api_key",
                     "explorer_tx",
                     "explorer_addr",
                     "rpc",

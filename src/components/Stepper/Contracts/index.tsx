@@ -66,7 +66,6 @@ const Contracts = (props: any) => {
                 let endpoint = chain[0].api;
             
                 endpoint = endpoint.replace("{address}", AppState.userAddress)
-                endpoint = endpoint.replace("{apikey}", chain[0].default_api_key)
 
                 return endpoint;
             }
@@ -91,21 +90,22 @@ const Contracts = (props: any) => {
 
     const getPastTransactions = async () => {
         const endpoint = getChainEndpoint()
+
         const res = await fetch(endpoint)
             .then(response => response.json())
             .then(data => {
-                if(data.message === "NOTOK") {
+                if(data.code && data.code === "ERR_NO_DATA_PROVIDER") {
                     setIsLoading(false)
-                    setError(data.result)
+                    setError(data.message)
                     return []
                 } 
-                return data.result
+                return data.transactions
             })
             .catch((e) => {
                 console.log(e)
             })
 
-        if(res.length) {
+        if(res && res.length) {
             // Filter out results for contract creations tx
             const contracts = res.filter( (tx: any) => tx.to == "")
             setTotalToFetch(contracts.length)
