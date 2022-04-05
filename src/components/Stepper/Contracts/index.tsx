@@ -93,19 +93,19 @@ const Contracts = (props: any) => {
 
         const res = await fetch(endpoint)
             .then(response => response.json())
-            .then(data => {
-                if(data.code && data.code === "ERR_NO_DATA_PROVIDER") {
+            .then(res => {
+                if(res.code && res.code === "ERR_NO_DATA_PROVIDER") {
                     setIsLoading(false)
-                    setError(data.message)
+                    setError(res.message)
                     return []
                 } 
-                return data.transactions
+                return res.data.transactions
             })
             .catch((e) => {
                 console.log(e)
             })
 
-        if(res && res.length) {
+        if(res.length) {
             // Filter out results for contract creations tx
             const contracts = res.filter( (tx: any) => tx.to == "")
             setTotalToFetch(contracts.length)
