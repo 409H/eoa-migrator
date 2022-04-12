@@ -13,6 +13,14 @@ interface IViewSelector {
     selected: boolean;
 }
 
+const Container = styled.div`
+    padding: 0.25em;
+`
+const Heading = styled.h3`
+    font-size: 23pt;
+    margin: 0 0 1em 0;
+`
+
 const TotalCreated = styled.div`
     margin: 0.5em 0;
 `
@@ -183,19 +191,21 @@ const Contracts = (props: any) => {
         )
     }
 
-    return (<>
-        <h3>Results</h3>
-        <p>
-            We check to see if your connected address has directly created a contract within the last 10,000 transactions{' '}
-            and if it has and it is detected to be <a href="https://eips.ethereum.org/EIPS/eip-173" target="_blank">EIP173</a> compliant, then we will offer you an easy-to-use button to{' '}
-            transfer ownership to your identified safe address.
-        </p>
-    
+    return (
+        <Container>
+            <Heading>Contact Ownership</Heading>
+            <p>
+                We check to see if your connected address has directly created a contract within the last 10,000 transactions{' '}
+                and if it has and it is detected to be <a href="https://eips.ethereum.org/EIPS/eip-173" target="_blank">EIP173</a> compliant, then we will offer you an easy-to-use button to{' '}
+                transfer ownership to your identified safe address.
+            </p>
+        
 
-        {!isLoading && totalToFetch > 0 && <TotalCreated>Total Contracts Created: {totalToFetch.toString()}</TotalCreated>}
+            {!isLoading && totalToFetch > 0 && <TotalCreated>Total Contracts Created: {totalToFetch.toString()}</TotalCreated>}
 
-        {renderResults()}
-    </>)
+            {renderResults()}
+        </Container>
+    )
 }
 
 export default Contracts;

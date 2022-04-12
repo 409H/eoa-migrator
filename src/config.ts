@@ -67,6 +67,18 @@ const CONFIG = {
         rpc: `https://api.mycryptoapi.com/eth`,
         gas: `https://eoa-migrator-api.herokuapp.com/gas?network=42`,
         ticker: `KOV`
+    }, {
+        chainId: 4,
+        name: "Rinkeby",
+        bg: "#dccff1",
+        color: "#212121",
+        api: `https://api-rinkeby.etherscan.io/api?module=account&action=txlist&address={address}&startblock=0&endblock=99999999&page=1&offset=0&sort=asc&apikey={apikey}`,
+        default_api_key: `KFS4CK4IZ3MN4HUHKYS638TUCK8F4N91MP`,
+        explorer_tx: `https://rinkeby.etherscan.io/tx/`,
+        explorer_addr: `https://rinkeby.etherscan.io/address/`,
+        rpc: `https://api.mycryptoapi.com/eth`,
+        gas: ``,
+        ticker: `RINK`
     }],
     ETH_SCAN: [{
         chainId: 1,
@@ -79,6 +91,9 @@ const CONFIG = {
         contractAddress: "0xc60ca833aef1911c17d4e69fda9de6850402f6e5"
     }, {
         chainId: 42,
+        contractAddress: "0x08A8fDBddc160A7d5b957256b903dCAb1aE512C5"
+    }, {
+        chainId: 4,
         contractAddress: "0x08A8fDBddc160A7d5b957256b903dCAb1aE512C5"
     }],
     TOKENS: {
@@ -93,6 +108,9 @@ const CONFIG = {
             endpoint: "https://unpkg.com/quickswap-default-token-list@1.2.18/build/quickswap-default.tokenlist.json"
         }, {
             chainId: 42,
+            endpoint: "https://tokens.coingecko.com/uniswap/all.json"
+        }, {
+            chainId: 4,
             endpoint: "https://tokens.coingecko.com/uniswap/all.json"
         }],
         ADDITIONAL_TOKENS: [{
@@ -125,6 +143,24 @@ const CONFIG = {
             symbol: "DAI",
             decimals: 18,
             logoURI: ""
+        }]
+    },
+    NFTS: {
+        ENDPOINTS: [{
+            chainId: 1,
+            endpoint: "https://eoa-migrator-api.herokuapp.com/wallet/nfts?address={address}&network=1",
+        }, {
+            chainId: 56,
+            endpoint: "https://eoa-migrator-api.herokuapp.com/wallet/nfts?address={address}&network=56"
+        }, {
+            chainId: 137,
+            endpoint: "https://eoa-migrator-api.herokuapp.com/wallet/nfts?address={address}&network=137"
+        }, {
+            chainId: 42,
+            endpoint: "https://eoa-migrator-api.herokuapp.com/wallet/nfts?address={address}&network=42"
+        }, {
+            chainId: 4,
+            endpoint: "https://eoa-migrator-api.herokuapp.com/wallet/nfts?address={address}&network=4"
         }]
     }
 }

@@ -168,10 +168,38 @@
             ]
         }
     },
+    "TOKENS": {
+        "type": "object",
+        "properties": {
+            "ENDPOINTS": {
+                "type": "array",
+                "minItems": 1,
+                "items": [{
+                    "type": "object",
+                    "properties": {
+                        "chainId": {
+                            "type": "number"
+                        },
+                        "endpoint": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "chainId",
+                        "endpoint"
+                    ]
+                }]
+            }
+        },
+        "required": [
+            "ENDPOINTS"
+        ]
+    },
     "required": [
         "DONATION",
         "ETH_SCAN",
         "CHAINS",
-        "TOKENS"
+        "TOKENS",
+        "NFTS"
     ]
 }
