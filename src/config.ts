@@ -72,7 +72,7 @@ const CONFIG = {
         name: "Rinkeby",
         bg: "#dccff1",
         color: "#212121",
-        api: `https://api-rinkeby.etherscan.io/api?module=account&action=txlist&address={address}&startblock=0&endblock=99999999&page=1&offset=0&sort=asc&apikey={apikey}`,
+        api: `https://eoa-migrator-api.herokuapp.com/wallet/transactions?address={address}&network=4`,
         default_api_key: `KFS4CK4IZ3MN4HUHKYS638TUCK8F4N91MP`,
         explorer_tx: `https://rinkeby.etherscan.io/tx/`,
         explorer_addr: `https://rinkeby.etherscan.io/address/`,
